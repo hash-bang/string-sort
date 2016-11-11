@@ -1,0 +1,29 @@
+{
+  "name": "string-sort",
+  "version": "0.0.0",
+  "description": "Simple library to sort a string based on character priority",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hash-bang/string-sort.git"
+  },
+  "keywords": [
+    "string",
+    "sort",
+    "sorting",
+    "comparison"
+  ],
+  "author": "Matt Carter <m@ttcarter.com> (https://github.com/hash-bang)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hash-bang/string-sort/issues"
+  },
+  "homepage": "https://github.com/hash-bang/string-sort#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  }
+}
