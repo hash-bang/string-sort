@@ -1,6 +1,6 @@
 string-sort
 ===========
-Simple library to sort a string based on character priority.
+Simple library to sort an array based on string character priority.
 
 
 ```javascript
