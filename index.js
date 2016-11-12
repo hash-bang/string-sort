@@ -3,31 +3,38 @@ var _ = require('lodash');
 var ss = module.exports = {
 	defaults: {
 		charOrder: 'abcdefghijklmnopqrstuvwxyz0123456789:/-_', // Character orders when comparing string positions (anything not here gets run via fallback())
-		fallback: c => 999,
+		fallback: c => {
+			return String.fromCharCode(65000);
+		},
+	},
+
+	transformTable: function(str) {
+		var table = {};
+		str.split('').forEach((c,i) => table[c] = String.fromCharCode(i + 65));
+		return table;
+	},
+
+	transform: function(str, options) {
+		var settings = _.defaults(options, this.defaults);
+		var table = this.transformTable(settings.charOrder);
+
+		return str.split('').map(c => table[c] || settings.fallback(c)).join('');
+	},
+
+	untransform: function(str, options) {
+		var settings = _.defaults(options, this.defaults);
+		var table = _.invert(ss.transformTable(settings));
+
+		return str.split('').map(c => table[c]).join('');
 	},
 
 	sort: function(arr, options) {
-		arr.sort((a, b) => ss.compare(a, b, options));
-		return arr;
-	},
-
-	compare: function(a, b, options) {
 		var settings = _.defaults(options, this.defaults);
+		var table = ss.transformTable(settings.charOrder);
 
-		if (_.isNumber(a) && _.isNumber(b)) {
-			if (a == b) return 0;
-			return a > b ? 1 : -1;
-		} else if (_.isString(a) && _.isString(b)) {
-			for (var i = 0; i < Math.min(a.length, b.length); i++) {
-				var aChar = a.substr(i, 1), bChar = b.substr(i, 1);
-				var aVal = settings.charOrder.indexOf(aChar), bVal = settings.charOrder.indexOf(bChar);
-				if (aVal < 0) aVal = settings.fallback(aChar);
-				if (bVal < 0) bVal = settings.fallback(bChar);
-
-				if (aVal > bVal) return 1;
-				if (bVal < aVal) return -1;
-				// Equal values continue looping
-			}
-		}
+		return arr
+			.map(i => [i, i.split('').map(c => table[c] || settings.fallback(c)).join('')])
+			.sort((a,b) => a[1] == b[1] ? 0 : a[1] > b[1] ? 1 : -1)
+			.map(i => i[0])
 	},
 };
