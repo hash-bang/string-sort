@@ -1,6 +1,6 @@
 {
   "name": "string-sort",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple library to sort a string based on character priority",
   "main": "index.js",
   "scripts": {
