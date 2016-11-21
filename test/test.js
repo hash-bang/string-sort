@@ -43,3 +43,22 @@ describe('stringSort.sort()', function() {
 	});
 	
 });
+
+describe('stringSort.sortBy()', function() {
+
+	it('should sort collections by a subkey', function() {
+		var people = [
+			{name: 'Joe', age: 22},
+			{name: 'John', age: 23},
+			{name: 'Josh', age: 34},
+			{name: 'Jon', age: 43},
+		];
+
+		// Standard alpha sort
+		expect(ss.sortBy(people, 'name', {charOrder: 'abcedfghijklmnopqrstuvwxyz'}).map(i => i.name)).to.be.deep.equal(['Joe', 'John', 'Jon', 'Josh']);
+
+		// Value the letter 'N' more than anything else
+		expect(ss.sortBy(people, 'name', {charOrder: 'nabcedfghijklmopqrstuvwxyz'}).map(i => i.name)).to.be.deep.equal(['Jon', 'Joe', 'John', 'Josh']);
+	});
+
+});

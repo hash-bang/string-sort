@@ -33,8 +33,18 @@ var ss = module.exports = {
 		var table = ss.transformTable(settings.charOrder);
 
 		return arr
-			.map(i => [i, i.split('').map(c => table[c] || settings.fallback(c)).join('')])
-			.sort((a,b) => a[1] == b[1] ? 0 : a[1] > b[1] ? 1 : -1)
-			.map(i => i[0])
+			.map(i => [i.split('').map(c => table[c] || settings.fallback(c)).join(''), i])
+			.sort((a,b) => a[0] == b[0] ? 0 : a[0] > b[0] ? 1 : -1)
+			.map(i => i[1])
+	},
+
+	sortBy: function(col, key, options) {
+		var settings = _.defaults(options, this.defaults);
+		var table = ss.transformTable(settings.charOrder);
+
+		return col
+			.map(i => [i[key].split('').map(c => table[c] || settings.fallback(c)).join(''), i])
+			.sort((a,b) => a[0] == b[0] ? 0 : a[0] > b[0] ? 1 : -1)
+			.map(i => i[1])
 	},
 };

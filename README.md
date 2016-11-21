@@ -24,7 +24,12 @@ API
 stringSort.sort(array, [options])
 ---------------------------------
 Sort and return an array with the supplied options.
-This function really just wraps Array.sort() for you.
+This function really just wraps Array.sort(), calculating the transform table beforehand.
+
+
+stringSort.sortBy(collection, key, [options])
+---------------------------------------------
+Similar to `sort()` but works on a collection (an array of objects) using the specified key as the sorter.
 
 
 stringSort.transformTable(charOrder)
