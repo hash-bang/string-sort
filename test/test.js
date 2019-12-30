@@ -41,6 +41,16 @@ describe('stringSort.sort()', function() {
 		expect(ss.sort(a)).to.be.deep.equal(['cat', 'catfish', 'cats', 'catsuit', 'caution', 'caveman', 'caves', 'cave-in']);
 		expect(ss.sort(a, {charOrder: '-abcdefghijklmnopqrstuvwxyz0123456789'})).to.be.deep.equal(['cat', 'catfish', 'cats', 'catsuit', 'caution', 'cave-in', 'caveman', 'caves']);
 	});
+
+	it('should bias sorter strings', function() {
+		var a = ['a', 'ab', 'abc', 'abcd', 'abcde', 'abcdef'];
+		expect(ss.sort(a)).to.deep.equal(['a', 'ab', 'abc', 'abcd', 'abcde', 'abcdef']);
+	});
+
+	it('should sort in a logical path order', function() {
+		var a = ['/', '/foo', '/bar', '/baz', '/foo/bar', '/foo/bar/baz', '/foo/foo', '/bar/foo', '/foo/baz'];
+		expect(ss.sort(a)).to.deep.equal(['/', '/bar', '/bar/foo', '/baz', '/foo', '/foo/bar', '/foo/bar/baz', '/foo/baz', '/foo/foo']);
+	});
 	
 });
 
