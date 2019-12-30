@@ -23,10 +23,10 @@
   },
   "homepage": "https://github.com/hash-bang/string-sort#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.1.2"
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
   },
   "dependencies": {
-    "lodash": "^4.16.6"
+    "lodash": "^4.17.15"
   }
 }
